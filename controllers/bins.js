@@ -21,7 +21,7 @@ binsRouter.all('/:id', (req, res, next) => {
   const newRequest = {
     method: req.method,
     ip: req.ip,
-    body: JSON.stringify(req.body),
+    body: JSON.stringify(req.body.payload || req.body),
     date: new Date(),
     hostname: `${req.protocol}://${req.hostname}`,
     path: req.originalUrl,
