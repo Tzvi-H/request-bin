@@ -4,7 +4,7 @@ const Bin = require('../models/bin');
 
 // Create a bin
 binsRouter.post('/', (req, res, next) => {
-  const bin = new Bin()
+  const bin = new Bin();
  
   bin.save()
     .then(createdBin => {
