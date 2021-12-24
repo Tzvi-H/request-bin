@@ -28,6 +28,10 @@ binsRouter.all('/:id', (req, res, next) => {
     headers: req.headers
   }
 
+  if (newRequest.ip.startsWith('::ffff:')) {
+    newRequest.ip = newRequest.ip.slice('::ffff:'.length)
+  }
+
   Bin.findByIdAndUpdate(req.params.id, {$push: {"requests": newRequest}}, { new: true })
     .then(updatedBin => {
       if (updatedBin) {
