@@ -2,7 +2,7 @@
 POST http://localhost:3000/api/bins/ 
 
 ### GET requests for a bin
-GET http://localhost:3000/api/bins/inspect/61c632ce39178846734ae585
+GET http://localhost:3000/api/bins/inspect/61c6356b4b60438f6263c504
 
 ### ALL add a request to a bin
-GET http://localhost:3000/api/bins/61c632ce39178846734ae585
+GET http://localhost:3000/api/bins/61c6356b4b60438f6263c504
