@@ -32,7 +32,7 @@ binsRouter.all('/:id', (req, res, next) => {
     newRequest.ip = newRequest.ip.slice('::ffff:'.length)
   }
 
-  Bin.findByIdAndUpdate(req.params.id, {$push: {"requests": newRequest}}, { new: true })
+  Bin.findByIdAndUpdate(req.params.id, {$push: {"requests": newRequest}})
     .then(updatedBin => {
       if (updatedBin) {
         res.status(200).end()
@@ -45,10 +45,10 @@ binsRouter.all('/:id', (req, res, next) => {
 
 // View bin requests
 binsRouter.get('/inspect/:id', (req, res, next) => {
-  Bin.findById(req.params.id, 'requests')
+  Bin.findById(req.params.id)
     .then(bin => {
       if (bin) {
-        res.json(bin)
+        res.json(bin.requests)
       } else {
         res.status(404).end();
       }
