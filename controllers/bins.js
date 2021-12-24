@@ -1,3 +1,4 @@
+const config = require('../utils/config');
 const binsRouter = require('express').Router();
 const Bin = require('../models/bin');
 
@@ -7,11 +8,12 @@ binsRouter.post('/', (req, res, next) => {
  
   bin.save()
     .then(createdBin => {
-      res.json(createdBin)
+      res.json({url: config.HOSTNAME + createdBin.id})
     })
     .catch(error => {
       next(error)
     })
+  console.log('hello')  
 })
 
 // Collect requests for a bin
@@ -19,7 +21,7 @@ binsRouter.all('/:id', (req, res, next) => {
   const newRequest = {
     method: req.method,
     ip: req.ip,
-    body: req.body,
+    body: JSON.strinify(req.body),
     date: new Date(),
     hostname: `${req.protocol}://${req.hostname}`,
     path: req.originalUrl,
@@ -39,7 +41,7 @@ binsRouter.all('/:id', (req, res, next) => {
 
 // View bin requests
 binsRouter.get('/inspect/:id', (req, res, next) => {
-  Bin.findById(req.params.id)
+  Bin.findById(req.params.id, 'requests')
     .then(bin => {
       if (bin) {
         res.json(bin)
