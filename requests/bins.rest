@@ -1,0 +1,14 @@
+### CREATE a new bin 
+POST http://localhost:3000/api/bins/ 
+Content-Type: application/json
+
+{
+  "content": "From vs code rest client", 
+  "important": true
+}
+
+### GET requests for a bin
+GET http://localhost:3000/api/bins/inspect/61c61fabc02579507e1ebe1c
+
+### ALL add a request to a bin
+PUT http://localhost:3000/api/bins/61c6269b8ad78c0a00f870d2
