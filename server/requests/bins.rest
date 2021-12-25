@@ -1,5 +1,5 @@
 ### CREATE a new bin 
-POST http://localhost:3000/api/bins/ 
+POST http://localhost:3001/api/bins/ 
 
 ### GET requests for a bin
 GET http://localhost:3000/api/bins/inspect/61c6356b4b60438f6263c504

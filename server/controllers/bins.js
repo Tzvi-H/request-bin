@@ -13,7 +13,6 @@ binsRouter.post('/', (req, res, next) => {
     .catch(error => {
       next(error)
     })
-  console.log('hello')  
 })
 
 // Collect requests for a bin
@@ -44,7 +43,7 @@ binsRouter.all('/:id', (req, res, next) => {
 })
 
 // View bin requests
-binsRouter.get('/inspect/:id', (req, res, next) => {
+binsRouter.get('/:id/inspect', (req, res, next) => {
   Bin.findById(req.params.id)
     .then(bin => {
       if (bin) {
