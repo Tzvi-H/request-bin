@@ -126,14 +126,3 @@ const BinUrl = () => {
 }
 
 export default BinUrl
-
-
-{/* 
-
-      <h5  className="my-3 font-bold">PowerShell</h5>
-      <p></p>
-
-      
-
-        </div>
-      </div> */}

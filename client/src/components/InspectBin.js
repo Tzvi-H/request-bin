@@ -13,7 +13,7 @@ const InspectBin = () => {
       .then(requests => {
         setBinRequests(requests);
       })
-  }, [])
+  }, [binId])
 
   return (
     <div>

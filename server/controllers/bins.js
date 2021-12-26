@@ -23,8 +23,7 @@ binsRouter.all('/:id', (req, res, next) => {
     ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
     body: JSON.stringify(req.body),
     date: new Date(),
-    hostname: `${req.protocol}://${req.hostname}`,
-    path: req.originalUrl,
+    url: `${req.protocol}://${req.hostname}${req.path}`,
     headers: req.headers
   }
 
