@@ -8,7 +8,8 @@ binsRouter.post('/', (req, res, next) => {
  
   bin.save()
     .then(createdBin => {
-      res.json({url: config.HOSTNAME + createdBin.id})
+      const bin = {url: config.HOSTNAME + createdBin.id, id: createdBin.id};
+      res.json(bin)
     })
     .catch(error => {
       next(error)

@@ -6,6 +6,11 @@ const create = async () => {
   return response.data
 }
 
-const binService = { create }
+const getBinRequests = async id => {
+  const response = await axios.get(`${baseUrl}/${id}/inspect`)
+  return response.data
+}
+
+const binService = { create, getBinRequests }
 
 export default binService
