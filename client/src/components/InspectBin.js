@@ -10,7 +10,7 @@ const InspectBin = () => {
 
   useEffect(() => {
     if (!listening) {
-      const events = new EventSource(`http://localhost:3001/api/bins/${binId}/inspect`);
+      const events = new EventSource(`http://localhost:3000/api/bins/${binId}/inspect`);
 
       events.onmessage = (event) => {
         const parsedData = JSON.parse(event.data);

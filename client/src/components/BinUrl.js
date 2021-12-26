@@ -21,7 +21,7 @@ const BinUrl = () => {
 
         <p className="text-lg font-bold">Inspect Bin</p>
         <p className="mb-6 text-3xl border-solid border-2 border-gray-400 hover:text-gray-500">
-          <Link to={`/inspect/${bin.id}`}>{`http://localhost:3001/inspect/${bin.id}`}</Link>
+          <Link to={`/inspect/${bin.id}`}>{`http://localhost:3000/inspect/${bin.id}`}</Link>
         </p>
       </div>
       <hr className="w-5/6 mx-auto"/>
