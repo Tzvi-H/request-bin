@@ -47,7 +47,7 @@ binsRouter.get('/:id/inspect', (req, res, next) => {
   Bin.findById(req.params.id)
     .then(bin => {
       if (bin) {
-        res.json(bin.requests)
+        res.json(bin.requests.reverse())
       } else {
         res.status(404).end();
       }
