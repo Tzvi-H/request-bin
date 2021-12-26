@@ -2,6 +2,11 @@ const config = require('../utils/config');
 const binsRouter = require('express').Router();
 const Bin = require('../models/bin');
 
+let clients = [];
+
+// Get how many clients have connected
+binsRouter.get('/status', (request, response) => response.json({clients: clients.length}));
+
 // Create a bin
 binsRouter.post('/', (req, res, next) => {
   const bin = new Bin();
@@ -35,6 +40,9 @@ binsRouter.all('/:id', (req, res, next) => {
     .then(updatedBin => {
       if (updatedBin) {
         res.status(200).end()
+        clients
+          .filter(client => client.binId === req.params.id)
+          .forEach(client => client.response.write(`data: ${JSON.stringify(newRequest)}\n\n`))
       } else {
         res.status(404).end();
       }
@@ -44,10 +52,29 @@ binsRouter.all('/:id', (req, res, next) => {
 
 // View bin requests
 binsRouter.get('/:id/inspect', (req, res, next) => {
-  Bin.findById(req.params.id)
+  const binId = req.params.id;
+  Bin.findById(binId)
     .then(bin => {
       if (bin) {
-        res.json(bin.requests.reverse())
+        const headers = {
+          'Content-Type': 'text/event-stream',
+          'Connection': 'keep-alive',
+          'Cache-Control': 'no-cache'
+        };
+        res.writeHead(200, headers);
+        const data = `data: ${JSON.stringify(bin.requests)}\n\n`;
+        res.write(data)
+        const clientId = Date.now();
+        const newClient = {
+          id: clientId,
+          binId,
+          response: res
+        };
+        clients.push(newClient);
+        req.on('close', () => {
+          console.log(`${clientId} Connection closed`);
+          clients = clients.filter(client => client.id !== clientId);
+        });
       } else {
         res.status(404).end();
       }
